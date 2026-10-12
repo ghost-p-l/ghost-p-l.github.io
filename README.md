@@ -5,12 +5,23 @@ Founder of Nurish. Builder of AI trading systems and MCP tooling for TradingView
 
 Static site — plain HTML, CSS, and JavaScript. No build step. Hosted on GitHub Pages.
 
+## Features
+- Command palette (`⌘K` / `Ctrl+K`) with fuzzy search over sections, actions, themes
+- Interactive terminal (`` ` `` key) with commands: `about`, `projects`, `skills`, `neofetch`, `theme`, `matrix`, …
+- 7 switchable themes (Midnight, Tokyo, Sunset, Forest, Ocean, Mono, Daylight) — persisted
+- Bento-grid about, animated stat counters, marquee tech ticker, custom cursor, magnetic buttons
+- Parallax blobs, film-grain overlay, scroll progress, side dot-nav, scroll-reveal
+- Project filtering, 3D tilt cards, GitHub API repo fetch (static fallback)
+- Konami-code easter egg → Matrix mode · toast notifications · boot sequence
+- Fully responsive, `prefers-reduced-motion` aware, SEO + JSON-LD structured data
+
 ## Structure
 ```
-index.html          # Single-page site
-styles/main.css     # Design tokens, dark/light theme, responsive layout
-scripts/main.js     # Typing effect, theme toggle, scroll reveal, GitHub repo fetch
-assets/             # CV (PDF)
+index.html              # Single-page site
+styles/main.css         # Theme tokens, bento grid, terminal, palette, cursor
+scripts/main.js         # Palette, terminal, themes, matrix, counters, GitHub fetch
+assets/                 # CV (PDF)
+robots.txt · sitemap.xml · manifest.webmanifest
 ```
 
 ## Local preview

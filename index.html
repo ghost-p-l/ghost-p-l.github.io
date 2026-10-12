@@ -1,32 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="midnight">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Liberty James — Computer Scientist &amp; AI / Full-Stack Developer</title>
-  <meta name="description" content="Liberty James — Computer Scientist and Software Developer. Founder of Nurish (AI wellness), builder of AI trading systems, MCP servers, and full-stack web applications." />
+  <meta name="description" content="Liberty James — Computer Scientist and Software Developer. Founder of Nurish (AI wellness), builder of AI trading systems, MCP servers for TradingView & MetaTrader, and full-stack web applications." />
   <meta name="author" content="Liberty James" />
-  <meta name="theme-color" content="#0b1020" />
+  <meta name="keywords" content="Liberty James, computer scientist, software developer, AI developer, full-stack developer, fintech, MCP, TradingView, MetaTrader, Nurish, Nairobi Kenya" />
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="canonical" href="https://ghost-p-l.github.io/" />
+  <link rel="manifest" href="manifest.webmanifest" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Liberty James — Computer Scientist & AI Developer" />
   <meta property="og:description" content="Founder of Nurish. AI + fintech + full-stack engineer. MCP tooling for TradingView & MetaTrader." />
   <meta property="og:url" content="https://ghost-p-l.github.io/" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='68' font-size='52' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>LJ</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='69' font-size='52' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>LJ</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/main.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Liberty James",
+    "jobTitle": "Computer Scientist & Software Developer",
+    "url": "https://ghost-p-l.github.io/",
+    "email": "mailto:libertyjames200@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Nairobi", "addressCountry": "Kenya" },
+    "sameAs": ["https://github.com/ghost-p-l"],
+    "knowsAbout": ["Artificial Intelligence", "Software Development", "Algorithmic Trading", "Model Context Protocol", "Full-Stack Web Development"],
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "St Paul's University" }
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- boot overlay -->
+  <div id="boot" class="boot" aria-hidden="true">
+    <div class="boot__inner">
+      <div class="boot__logo">LJ</div>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+      <div class="boot__log" id="bootLog"></div>
+    </div>
+  </div>
+
+  <!-- custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- matrix overlay -->
+  <canvas id="matrix" class="matrix" aria-hidden="true"></canvas>
+
+  <!-- scroll progress -->
+  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+
+  <!-- side dot nav -->
+  <nav class="dots" id="dots" aria-label="Section navigation">
+    <a href="#home" data-label="Home"></a>
+    <a href="#about" data-label="About"></a>
+    <a href="#experience" data-label="Experience"></a>
+    <a href="#projects" data-label="Projects"></a>
+    <a href="#skills" data-label="Skills"></a>
+    <a href="#education" data-label="Education"></a>
+    <a href="#contact" data-label="Contact"></a>
+  </nav>
+
   <header class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#home" class="nav__brand">LJ<span>.</span></a>
+      <a href="#home" class="nav__brand" data-cursor="link">LJ<span>.</span></a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -38,22 +86,35 @@
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
-        <span class="theme-toggle__icon">🌙</span>
-      </button>
+      <div class="nav__actions">
+        <button class="k-btn" id="openPalette" aria-label="Open command palette">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>Search</span><kbd>⌘K</kbd>
+        </button>
+        <div class="theme-switch" id="themeSwitch" role="group" aria-label="Theme">
+          <button id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choose theme">
+            <span class="theme-switch__dot" id="themeDot"></span>
+          </button>
+          <div class="theme-menu" id="themeMenu"></div>
+        </div>
+      </div>
     </div>
-    <div class="nav__progress" id="navProgress"></div>
   </header>
 
   <main id="main">
     <!-- HERO -->
     <section class="hero" id="home">
-      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__bg" aria-hidden="true">
+        <span class="blob blob--1" data-parallax="0.15"></span>
+        <span class="blob blob--2" data-parallax="-0.1"></span>
+        <span class="blob blob--3" data-parallax="0.08"></span>
+        <div class="grid-lines"></div>
+      </div>
       <div class="container hero__inner">
         <p class="hero__eyebrow reveal"><span class="dot"></span> Nairobi, Kenya · Open to opportunities</p>
         <h1 class="hero__name reveal">Liberty James</h1>
         <p class="hero__role reveal">
-          <span id="typed" class="hero__typed"></span><span class="caret" aria-hidden="true">▋</span>
+          <span id="typed"></span><span class="caret" aria-hidden="true">▋</span>
         </p>
         <p class="hero__lead reveal">
           Computer Scientist and Software Developer building AI products, automated
@@ -61,50 +122,56 @@
           <strong>Nurish</strong>, an AI-driven wellness startup.
         </p>
         <div class="hero__cta reveal">
-          <a class="btn btn--primary" href="#projects">View Projects</a>
-          <a class="btn btn--ghost" href="assets/Liberty_James_CV.pdf" download>Download CV</a>
-          <a class="btn btn--ghost" href="https://github.com/ghost-p-l" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn--primary magnetic" href="#projects" data-cursor="link">View Work</a>
+          <a class="btn btn--ghost magnetic" href="assets/Liberty_James_CV.pdf" download data-cursor="link">Download CV</a>
+          <a class="btn btn--ghost magnetic" href="https://github.com/ghost-p-l" target="_blank" rel="noopener" data-cursor="link">GitHub ↗</a>
         </div>
-        <ul class="hero__stats reveal">
-          <li><strong>5+</strong><span>Years Building</span></li>
-          <li><strong>3</strong><span>Open-Source Tools</span></li>
-          <li><strong>AI · Fintech</strong><span>Domains</span></li>
+        <ul class="hero__stats reveal" id="stats">
+          <li><strong data-count="5" data-suffix="+">0</strong><span>Years Building</span></li>
+          <li><strong data-count="3" data-suffix="">0</strong><span>Open-Source Tools</span></li>
+          <li><strong data-count="6" data-suffix="+">0</strong><span>Projects Shipped</span></li>
         </ul>
+        <button class="hero__hint" id="hintBtn" aria-label="Open terminal">
+          Press <kbd>⌘K</kbd> anywhere · or type <code>&gt;_</code>
+        </button>
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT / BENTO -->
     <section class="section" id="about">
       <div class="container">
         <h2 class="section__title reveal"><span>01.</span> About</h2>
-        <div class="about">
-          <div class="about__text reveal">
+        <div class="bento">
+          <article class="bento__cell bento__cell--wide reveal">
+            <h3 class="bento__label">Profile</h3>
             <p>
               I'm a computer scientist and software developer with hands-on experience
               across AI product development, financial trading systems, and full-stack
-              web engineering.
+              web engineering. I like turning messy problems into clear, working software.
             </p>
-            <p>
-              I founded <strong>Nurish</strong>, an AI-driven wellness application that
-              delivers personalized, data-driven guidance, and I built the core AI engine
-              behind it. I also create <strong>Model Context Protocol (MCP)</strong> tooling
-              that connects AI agents to live trading platforms including
-              <strong>TradingView</strong> and <strong>MetaTrader</strong>.
-            </p>
-            <p>
-              I'm comfortable working end-to-end — from architecting an AI engine and
-              shipping an MVP to building automated trading tools and delivering client
-              websites. I'm currently completing a Diploma in Computer Science at
-              St Paul's University.
-            </p>
-          </div>
-          <aside class="about__card reveal">
-            <div class="about__row"><span>Role</span><strong>AI &amp; Full-Stack Developer</strong></div>
-            <div class="about__row"><span>Focus</span><strong>AI · Fintech · Web</strong></div>
-            <div class="about__row"><span>Founder</span><strong>Nurish</strong></div>
-            <div class="about__row"><span>Location</span><strong>Nairobi, Kenya</strong></div>
-            <div class="about__row"><span>Languages</span><strong>English · Kiswahili</strong></div>
-          </aside>
+          </article>
+          <article class="bento__cell reveal">
+            <h3 class="bento__label">Founder</h3>
+            <p class="bento__big">Nurish</p>
+            <p class="bento__sub">AI wellness startup — architected the core AI engine and full stack.</p>
+          </article>
+          <article class="bento__cell reveal">
+            <h3 class="bento__label">Focus</h3>
+            <p class="bento__big">AI · Fintech · Web</p>
+            <p class="bento__sub">LLMs, MCP tooling, trading systems, and full-stack apps.</p>
+          </article>
+          <article class="bento__cell reveal">
+            <h3 class="bento__label">Location</h3>
+            <p class="bento__big">Nairobi, Kenya</p>
+            <p class="bento__sub">Remote-friendly · EAT (UTC+3)</p>
+          </article>
+          <article class="bento__cell bento__cell--wide reveal">
+            <h3 class="bento__label">Now</h3>
+            <p class="bento__sub">Currently completing a <strong>Diploma in Computer Science</strong> at St Paul's University (Expected 2027), while building AI and trading tools.</p>
+            <div class="bento__chips">
+              <span>Python</span><span>TypeScript</span><span>MQL5</span><span>Pine Script</span><span>LLMs</span><span>MCP</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -163,53 +230,46 @@
     <section class="section" id="projects">
       <div class="container">
         <h2 class="section__title reveal"><span>03.</span> Projects</h2>
-        <div class="grid grid--projects" id="repoGrid">
-          <!-- Populated by JS from GitHub + static entries below -->
-          <article class="card card--project reveal" data-static>
-            <div class="card__top">
-              <span class="card__icon">🌿</span>
-              <span class="card__tag">Startup</span>
-            </div>
+
+        <div class="filters reveal" id="filters">
+          <button class="chip is-active" data-filter="all">All</button>
+          <button class="chip" data-filter="ai">AI</button>
+          <button class="chip" data-filter="fintech">Fintech</button>
+          <button class="chip" data-filter="web">Web</button>
+          <button class="chip" data-filter="startup">Startup</button>
+        </div>
+
+        <div class="grid grid--projects" id="projGrid">
+          <article class="card card--project tilt reveal" data-cat="startup ai">
+            <div class="card__top"><span class="card__icon">🌿</span><span class="card__tag">Startup</span></div>
             <h3 class="card__title">Nurish — AI Wellness App</h3>
             <p class="card__desc">Founded and led development of an AI-powered wellness platform delivering personalized health and lifestyle guidance through LLM-driven features.</p>
             <ul class="card__stack"><li>LLMs</li><li>Python</li><li>APIs</li></ul>
           </article>
 
-          <article class="card card--project reveal" data-static>
-            <div class="card__top">
-              <span class="card__icon">📈</span>
-              <span class="card__tag">Fintech</span>
-            </div>
+          <article class="card card--project tilt reveal" data-cat="fintech ai">
+            <div class="card__top"><span class="card__icon">📈</span><span class="card__tag">Fintech</span></div>
             <h3 class="card__title">AI Financial Expert Advisors</h3>
             <p class="card__desc">Automated advisory systems that analyze markets and generate trade decisions as reusable, deployable tools.</p>
             <ul class="card__stack"><li>MQL5</li><li>Python</li><li>Backtesting</li></ul>
           </article>
 
-          <article class="card card--project reveal" data-static>
-            <div class="card__top">
-              <span class="card__icon">🛰️</span>
-              <span class="card__tag">Fintech</span>
-            </div>
+          <article class="card card--project tilt reveal" data-cat="fintech">
+            <div class="card__top"><span class="card__icon">🛰️</span><span class="card__tag">Fintech</span></div>
             <h3 class="card__title">Custom Trading Indicators</h3>
             <p class="card__desc">Technical-analysis indicators built for live markets on TradingView and MetaTrader, supporting real-time signals.</p>
             <ul class="card__stack"><li>Pine Script</li><li>TradingView</li><li>MetaTrader</li></ul>
           </article>
 
-          <article class="card card--project reveal" data-static>
-            <div class="card__top">
-              <span class="card__icon">🧩</span>
-              <span class="card__tag">AI Infra</span>
-            </div>
+          <article class="card card--project tilt reveal" data-cat="ai fintech">
+            <div class="card__top"><span class="card__icon">🧩</span><span class="card__tag">AI Infra</span></div>
             <h3 class="card__title">MCP Trading Integrations</h3>
             <p class="card__desc">Model Context Protocol servers bridging AI agents with TradingView and MetaTrader for direct, programmatic trading.</p>
             <ul class="card__stack"><li>MCP</li><li>TypeScript</li><li>APIs</li></ul>
           </article>
 
-          <article class="card card--project reveal" data-static>
-            <div class="card__top">
-              <span class="card__icon">🌐</span>
-              <span class="card__tag">Web</span>
-            </div>
+          <article class="card card--project tilt reveal" data-cat="web">
+            <div class="card__top"><span class="card__icon">🌐</span><span class="card__tag">Web</span></div>
             <h3 class="card__title">Corporate Websites</h3>
             <p class="card__desc">Full-stack, production-grade web builds delivered for business clients.</p>
             <ul class="card__stack"><li>JavaScript</li><li>SQL</li><li>SEO</li></ul>
@@ -229,6 +289,13 @@
     <section class="section" id="skills">
       <div class="container">
         <h2 class="section__title reveal"><span>04.</span> Skills</h2>
+      </div>
+
+      <div class="marquee reveal" aria-hidden="true">
+        <div class="marquee__track" id="marqueeTrack"></div>
+      </div>
+
+      <div class="container">
         <div class="grid grid--skills">
           <div class="skill reveal">
             <h3>AI &amp; ML</h3>
@@ -278,19 +345,21 @@
     <!-- CONTACT -->
     <section class="section section--contact" id="contact">
       <div class="container contact reveal">
+        <p class="contact__eyebrow">06 · Contact</p>
         <h2 class="contact__title">Let's build something.</h2>
         <p class="contact__lead">
           Open to software engineering, AI, and fintech roles — and to new projects.
           The fastest way to reach me is email.
         </p>
         <div class="contact__cta">
-          <a class="btn btn--primary" href="mailto:libertyjames200@gmail.com">libertyjames200@gmail.com</a>
-          <button class="btn btn--ghost" id="copyPhone" data-phone="+254 790 689 052">Copy phone</button>
+          <a class="btn btn--primary magnetic" href="mailto:libertyjames200@gmail.com" data-cursor="link">libertyjames200@gmail.com</a>
+          <button class="btn btn--ghost magnetic" id="copyPhone" data-copy="+254 790 689 052" data-cursor="link">Copy phone</button>
+          <button class="btn btn--ghost magnetic" id="copyEmail" data-copy="libertyjames200@gmail.com" data-cursor="link">Copy email</button>
         </div>
         <ul class="contact__links">
-          <li><a href="https://github.com/ghost-p-l" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="mailto:libertyjames200@gmail.com">Email</a></li>
-          <li><a href="assets/Liberty_James_CV.pdf" download>CV (PDF)</a></li>
+          <li><a href="https://github.com/ghost-p-l" target="_blank" rel="noopener" data-cursor="link">GitHub</a></li>
+          <li><a href="mailto:libertyjames200@gmail.com" data-cursor="link">Email</a></li>
+          <li><a href="assets/Liberty_James_CV.pdf" download data-cursor="link">CV (PDF)</a></li>
         </ul>
       </div>
     </section>
@@ -299,9 +368,60 @@
   <footer class="footer">
     <div class="container footer__inner">
       <p>© <span id="year"></span> Liberty James · Nairobi, Kenya</p>
-      <p class="footer__note">Built with plain HTML, CSS &amp; JavaScript · Hosted on GitHub Pages</p>
+      <p class="footer__note">Plain HTML/CSS/JS · <button class="linkbtn" id="openTerminal">terminal</button> · <button class="linkbtn" id="openHelp">shortcuts</button></p>
     </div>
   </footer>
+
+  <!-- back to top -->
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- COMMAND PALETTE -->
+  <div class="overlay" id="palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="palette">
+      <div class="palette__bar">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="paletteInput" type="text" placeholder="Search sections, actions, themes…" autocomplete="off" spellcheck="false" />
+        <kbd>Esc</kbd>
+      </div>
+      <ul class="palette__list" id="paletteList"></ul>
+      <div class="palette__foot"><span>↑↓ navigate</span><span>↵ select</span><span>⌘K toggle</span></div>
+    </div>
+  </div>
+
+  <!-- TERMINAL -->
+  <div class="overlay" id="terminalOverlay" role="dialog" aria-modal="true" aria-label="Terminal" hidden>
+    <div class="term">
+      <div class="term__head">
+        <span class="term__dot" style="background:#ff5f57"></span>
+        <span class="term__dot" style="background:#febc2e"></span>
+        <span class="term__dot" style="background:#28c840"></span>
+        <span class="term__title">liberty@ghost-p-l: ~</span>
+        <button class="term__close" id="closeTerminal" aria-label="Close terminal">✕</button>
+      </div>
+      <div class="term__body" id="termBody"></div>
+      <form class="term__input" id="termForm" autocomplete="off">
+        <span class="term__prompt">➜&nbsp;~&nbsp;</span>
+        <input id="termInput" type="text" aria-label="Terminal input" spellcheck="false" autocomplete="off" />
+      </form>
+    </div>
+  </div>
+
+  <!-- SHORTCUTS -->
+  <div class="overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" hidden>
+    <div class="palette help">
+      <div class="palette__bar"><strong>Keyboard shortcuts</strong><kbd>Esc</kbd></div>
+      <ul class="help__list">
+        <li><span>Command palette</span><kbd>⌘K</kbd></li>
+        <li><span>Terminal</span><kbd>`</kbd> or <kbd>Ctrl</kbd>+<kbd>`</kbd></li>
+        <li><span>Open shortcuts</span><kbd>?</kbd></li>
+        <li><span>Toggle theme</span><kbd>⌘J</kbd></li>
+        <li><span>Matrix mode</span><kbd>↑↑↓↓←→←→BA</kbd></li>
+        <li><span>Close any overlay</span><kbd>Esc</kbd></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="scripts/main.js" defer></script>
 </body>

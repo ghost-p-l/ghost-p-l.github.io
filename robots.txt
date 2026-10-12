@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ghost-p-l.github.io/sitemap.xml
