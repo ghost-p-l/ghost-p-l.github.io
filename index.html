@@ -8,6 +8,11 @@
   <meta name="author" content="Liberty James" />
   <meta name="keywords" content="Liberty James, computer scientist, software developer, AI developer, full-stack developer, fintech, MCP, TradingView, MetaTrader, Nurish, Nairobi Kenya" />
   <meta name="theme-color" content="#0a0e1a" />
+  <meta name="color-scheme" content="dark light" />
+  <!-- GitHub Pages serves static files only (no custom HTTP headers), so the
+       enforceable security policy ships here as meta tags. -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests" />
   <link rel="canonical" href="https://ghost-p-l.github.io/" />
   <link rel="manifest" href="manifest.webmanifest" />
 
@@ -16,13 +21,25 @@
   <meta property="og:title" content="Liberty James — Computer Scientist & AI Developer" />
   <meta property="og:description" content="Founder of Nurish. AI + fintech + full-stack engineer. MCP tooling for TradingView & MetaTrader." />
   <meta property="og:url" content="https://ghost-p-l.github.io/" />
+  <meta property="og:image" content="https://ghost-p-l.github.io/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Liberty James — Computer Scientist & AI Developer, Founder @ Nurish" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ghost-p-l.github.io/assets/og-image.png" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='69' font-size='52' font-family='monospace' font-weight='bold' fill='white' text-anchor='middle'>LJ</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/main.css" />
+  <!-- ?v= content hashes: bump on every change so browsers/CDN fetch fresh assets -->
+  <link rel="stylesheet" href="styles/main.css?v=365b514" />
+  <noscript>
+    <style>
+      #boot, .cursor, .cursor-dot { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
 
   <script type="application/ld+json">
   {
@@ -63,13 +80,13 @@
 
   <!-- side dot nav -->
   <nav class="dots" id="dots" aria-label="Section navigation">
-    <a href="#home" data-label="Home"></a>
-    <a href="#about" data-label="About"></a>
-    <a href="#experience" data-label="Experience"></a>
-    <a href="#projects" data-label="Projects"></a>
-    <a href="#skills" data-label="Skills"></a>
-    <a href="#education" data-label="Education"></a>
-    <a href="#contact" data-label="Contact"></a>
+    <a href="#home" data-label="Home" aria-label="Home"></a>
+    <a href="#about" data-label="About" aria-label="About"></a>
+    <a href="#experience" data-label="Experience" aria-label="Experience"></a>
+    <a href="#projects" data-label="Projects" aria-label="Projects"></a>
+    <a href="#skills" data-label="Skills" aria-label="Skills"></a>
+    <a href="#education" data-label="Education" aria-label="Education"></a>
+    <a href="#contact" data-label="Contact" aria-label="Contact"></a>
   </nav>
 
   <header class="nav" id="nav">
@@ -127,9 +144,9 @@
           <a class="btn btn--ghost magnetic" href="https://github.com/ghost-p-l" target="_blank" rel="noopener" data-cursor="link">GitHub ↗</a>
         </div>
         <ul class="hero__stats reveal" id="stats">
-          <li><strong data-count="5" data-suffix="+">0</strong><span>Years Building</span></li>
-          <li><strong data-count="3" data-suffix="">0</strong><span>Open-Source Tools</span></li>
-          <li><strong data-count="6" data-suffix="+">0</strong><span>Projects Shipped</span></li>
+          <li><strong data-count="5" data-suffix="+">5+</strong><span>Years Building</span></li>
+          <li><strong data-count="3" data-suffix="">3</strong><span>Open-Source Tools</span></li>
+          <li><strong data-count="6" data-suffix="+">6+</strong><span>Projects Shipped</span></li>
         </ul>
         <button class="hero__hint" id="hintBtn" aria-label="Open terminal">
           Press <kbd>⌘K</kbd> anywhere · or type <code>&gt;_</code>
@@ -392,9 +409,9 @@
   <div class="overlay" id="terminalOverlay" role="dialog" aria-modal="true" aria-label="Terminal" hidden>
     <div class="term">
       <div class="term__head">
-        <span class="term__dot" style="background:#ff5f57"></span>
-        <span class="term__dot" style="background:#febc2e"></span>
-        <span class="term__dot" style="background:#28c840"></span>
+        <span class="term__dot dot--r"></span>
+        <span class="term__dot dot--y"></span>
+        <span class="term__dot dot--g"></span>
         <span class="term__title">liberty@ghost-p-l: ~</span>
         <button class="term__close" id="closeTerminal" aria-label="Close terminal">✕</button>
       </div>
@@ -423,6 +440,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="scripts/main.js" defer></script>
+  <script src="scripts/main.js?v=b012ed4" defer></script>
 </body>
 </html>

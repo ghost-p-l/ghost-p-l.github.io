@@ -136,7 +136,9 @@
         entries.forEach((en) => {
           if (!en.isIntersecting) return;
           const el = en.target, target = +el.dataset.count, suffix = el.dataset.suffix || "";
-          if (REDUCED) { el.textContent = target + suffix; statIO.unobserve(el); return; }
+          statIO.unobserve(el);
+          if (REDUCED) return; // HTML already carries the final value (noscript-safe)
+          el.textContent = "0" + suffix;
           const t0 = performance.now(), dur = 1200;
           (function step(now) {
             const p = Math.min((now - t0) / dur, 1);
@@ -144,7 +146,6 @@
             el.textContent = Math.round(target * eased) + suffix;
             if (p < 1) requestAnimationFrame(step);
           })(t0);
-          statIO.unobserve(el);
         });
       }, { threshold: 0.5 })
     : null;
@@ -161,10 +162,14 @@
   /* ---------------------------------------------------------- PARALLAX BLOBS */
   const blobs = $$("[data-parallax]");
   if (blobs.length && !REDUCED) {
-    let sy = 0;
+    let sy = window.scrollY, heroVisible = true;
+    const hero = $(".hero");
+    if (hero && "IntersectionObserver" in window) {
+      new IntersectionObserver((en) => { heroVisible = en[0].isIntersecting; }).observe(hero);
+    }
     window.addEventListener("scroll", () => { sy = window.scrollY; }, { passive: true });
     (function raf() {
-      blobs.forEach((b) => { b.style.transform = `translateY(${sy * parseFloat(b.dataset.parallax)}px)`; });
+      if (heroVisible) blobs.forEach((b) => { b.style.transform = `translateY(${sy * parseFloat(b.dataset.parallax)}px)`; });
       requestAnimationFrame(raf);
     })();
   }
@@ -204,13 +209,25 @@
     { name: "shennina", desc: "Open-source project by ghost-p-l.", lang: "Code", url: "https://github.com/ghost-p-l/shennina", tag: "Open Source" },
   ];
   const ghGrid = $("#ghGrid");
+  function safeUrl(u) {
+    try { const p = new URL(u, location.origin); return p.protocol === "https:" ? p.href : "#"; }
+    catch (e) { return "#"; }
+  }
   function repoCard(r) {
+    // Never inject API-supplied strings as raw HTML (repo descriptions are
+    // free text and could carry markup). Escape everything, allow https only.
+    const url = safeUrl(r.url || "#");
+    const name = esc(String(r.name || "repo"));
+    const desc = esc(String(r.desc || "Open-source project."));
+    const lang = esc(String(r.lang || "Code"));
+    const tag = esc(String(r.tag || "Repo"));
+    const stars = Number.isFinite(+r.stars) && +r.stars > 0 ? `<li>★ ${Math.floor(+r.stars)}</li>` : "";
     return `<article class="card card--project tilt">
-      <div class="card__top"><span class="card__icon">📦</span><span class="card__tag">${r.tag || "Repo"}</span></div>
-      <h3 class="card__title"><a href="${r.url}" target="_blank" rel="noopener">${r.name}</a></h3>
-      <p class="card__desc">${r.desc}</p>
-      <ul class="card__stack"><li>${r.lang || "Code"}</li>${r.stars ? `<li>★ ${r.stars}</li>` : ""}</ul>
-      <div class="card__links"><a href="${r.url}" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+      <div class="card__top"><span class="card__icon">📦</span><span class="card__tag">${tag}</span></div>
+      <h3 class="card__title"><a href="${url}" target="_blank" rel="noopener">${name}</a></h3>
+      <p class="card__desc">${desc}</p>
+      <ul class="card__stack"><li>${lang}</li>${stars}</ul>
+      <div class="card__links"><a href="${url}" target="_blank" rel="noopener">View on GitHub ↗</a></div>
     </article>`;
   }
   async function loadRepos() {
@@ -295,12 +312,13 @@
     pActive = i;
     $$("#paletteList li[data-i]").forEach((li) => li.classList.toggle("active", +li.dataset.i === i));
   }
-  function runPalette(i) { const a = pFiltered[i]; if (a) { if (a.id !== "terminal" && a.id !== "help" && a.id !== "matrix") closeAll(); a.run(); } }
+  function runPalette(i) { const a = pFiltered[i]; if (!a) return; closeAll(); a.run(); }
 
   function openPalette() { toggleOverlay(palette); if (!palette.hidden) { pInput.value = ""; renderPalette(""); setTimeout(() => pInput.focus(), 30); } }
 
   pInput?.addEventListener("input", () => renderPalette(pInput.value));
   pInput?.addEventListener("keydown", (e) => {
+    if (!pFiltered.length) return;
     if (e.key === "ArrowDown") { e.preventDefault(); setActive((pActive + 1) % pFiltered.length); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive((pActive - 1 + pFiltered.length) % pFiltered.length); }
     else if (e.key === "Enter") { e.preventDefault(); runPalette(pActive); }
@@ -432,6 +450,7 @@ trading systems, and full-stack web applications.`,
   /* --------------------------------------------------------------- MATRIX */
   const matrix = $("#matrix");
   let mRAF = null, mCtx = null, mCols = [], mRunning = false;
+  function matrixOn() { return mRunning; }
   function toggleMatrix() {
     if (!matrix) return;
     mRunning = !mRunning;
@@ -500,7 +519,7 @@ trading systems, and full-stack web applications.`,
 
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); openPalette(); return; }
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "j") { e.preventDefault(); cycleTheme(); return; }
-    if (e.key === "Escape") { closeAll(); return; }
+    if (e.key === "Escape") { if (typeof stopMatrix === "function" && matrixOn()) stopMatrix(); closeAll(); return; }
     if (typing) return;
 
     if (e.key === "?") { e.preventDefault(); toggleOverlay(helpOverlay); return; }
@@ -539,5 +558,5 @@ trading systems, and full-stack web applications.`,
   const y = $("#year"); if (y) y.textContent = new Date().getFullYear();
 
   /* expose a couple of helpers for debugging */
-  window.LJ = { applyTheme, openPalette, openTerminal, toggleMatrix, cycleTheme };
+  window.LJ = { applyTheme, openPalette, openTerminal, toggleMatrix, stopMatrix, cycleTheme };
 })();

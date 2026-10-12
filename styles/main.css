@@ -274,6 +274,9 @@ kbd {
 [data-theme="daylight"] .term { background: #0f1117; }
 .term__head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #12151f; border-bottom: 1px solid rgba(255,255,255,.07); }
 .term__dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot--r { background: #ff5f57; }
+.dot--y { background: #febc2e; }
+.dot--g { background: #28c840; }
 .term__title { margin-left: 8px; color: #8b93ad; font-size: .8rem; }
 .term__close { margin-left: auto; background: none; border: 0; color: #8b93ad; cursor: pointer; font-size: .9rem; }
 .term__body { padding: 16px; height: 46vh; overflow-y: auto; font-size: .86rem; line-height: 1.6; color: #cdd3e6; white-space: pre-wrap; word-break: break-word; }

@@ -1,0 +1,4 @@
+Contact: mailto:libertyjames200@gmail.com
+Expires: 2027-10-12T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://ghost-p-l.github.io/.well-known/security.txt
