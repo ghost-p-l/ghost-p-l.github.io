@@ -221,6 +221,7 @@ kbd {
 
 /* ---------- EDUCATION ---------- */
 .edu { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+.edu + .edu { margin-top: 16px; }
 .edu__head { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .edu__head h3 { margin: 0; }
 .edu__org { margin: 4px 0 0; color: var(--dim); }

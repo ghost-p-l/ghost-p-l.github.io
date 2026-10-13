@@ -371,7 +371,7 @@ trading systems, and full-stack web applications.`,
   2022–2026  Algorithmic Trading Developer — Fin. Trading Systems
   2021–2026  Full-Stack Web Developer — Client Projects
   2019–2024  Project Manager`,
-    education: () => `Computer Science`,
+    education: () => `Computer Science; Project Management course (2019–2024)`,
     contact: () => `<span class="c-acc">Contact:</span>
   email  libertyjames200@gmail.com
   phone  +254 790 689 052
