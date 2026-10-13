@@ -285,6 +285,7 @@
     { id: "education", icon: "🎓", label: "Go to Education", hint: "section", run: () => go("#education") },
     { id: "contact", icon: "✉️", label: "Go to Contact", hint: "section", run: () => go("#contact") },
     { id: "cv", icon: "📄", label: "Download CV", hint: "action", run: () => (window.location.href = "assets/Liberty_James_CV.pdf") },
+    { id: "mql5", icon: "📈", label: "Open MQL5 freelance profile", hint: "link", run: () => window.open("https://www.mql5.com/en/users/plane2", "_blank") },
     { id: "email", icon: "📧", label: "Copy email address", hint: "action", run: () => copy("libertyjames200@gmail.com") },
     { id: "phone", icon: "📱", label: "Copy phone number", hint: "action", run: () => copy("+254 790 689 052") },
     { id: "github", icon: "🐙", label: "Open GitHub profile", hint: "link", run: () => window.open("https://github.com/ghost-p-l", "_blank") },
@@ -347,6 +348,7 @@
   <span class="c-acc">education</span>   studies
   <span class="c-acc">contact</span>     how to reach me
   <span class="c-acc">cv</span>          download my CV
+  <span class="c-acc">mql5</span>        open my MQL5 freelance profile
   <span class="c-acc">theme</span> <span class="c-dim">[name]</span>  list or set theme
   <span class="c-acc">matrix</span>      toggle matrix mode
   <span class="c-acc">neofetch</span>    system info
@@ -370,7 +372,8 @@ trading systems, and full-stack web applications.`,
   2025–2026  Founder & Lead Developer — Nurish
   2022–2026  Algorithmic Trading Developer — Fin. Trading Systems
   2021–2026  Full-Stack Web Developer — Client Projects
-  2019–2024  Project Manager`,
+  2019–2024  Project Manager
+  MQL5 freelance: 12 jobs completed, 4.3-star rating (mql5.com/en/users/plane2)`,
     education: () => `Computer Science; Project Management course (2019–2024)`,
     contact: () => `<span class="c-acc">Contact:</span>
   email  libertyjames200@gmail.com
@@ -380,6 +383,7 @@ trading systems, and full-stack web applications.`,
     date: () => new Date().toString(),
     echo: (args) => esc(args.join(" ")),
     cv: () => { window.location.href = "assets/Liberty_James_CV.pdf"; return "Downloading CV…"; },
+    mql5: () => { window.open("https://www.mql5.com/en/users/plane2", "_blank", "noopener"); return "Opening MQL5 profile (plane2 — 12 jobs, 4.3 stars)…"; },
     theme: (args) => {
       if (!args.length) return "Themes: " + THEMES.map((t) => t.id).join(", ");
       if (THEMES.some((t) => t.id === args[0])) { applyTheme(args[0]); return "Theme → " + args[0]; }
