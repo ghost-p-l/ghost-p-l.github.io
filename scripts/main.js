@@ -369,8 +369,9 @@ trading systems, and full-stack web applications.`,
     experience: () => `<span class="c-acc">Experience:</span>
   2025–2026  Founder & Lead Developer — Nurish
   2022–2026  Algorithmic Trading Developer — Fin. Trading Systems
-  2021–2026  Full-Stack Web Developer — Client Projects`,
-    education: () => `Diploma in Computer Science — St Paul's University (Expected 2027)`,
+  2021–2026  Full-Stack Web Developer — Client Projects
+  2019–2024  Project Manager`,
+    education: () => `Computer Science`,
     contact: () => `<span class="c-acc">Contact:</span>
   email  libertyjames200@gmail.com
   phone  +254 790 689 052
